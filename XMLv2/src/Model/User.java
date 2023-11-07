@@ -1,16 +1,17 @@
 package Model;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
-public class Usuarios {
+public class User {
     private int id;
     private String nombre;
     private int edad;
 
-    public Usuarios(int id, String nombre, int edad) {
-        this.id = id;
-        this.nombre = nombre;
-        this.edad = edad;
+    public User() {
     }
 
+    @XmlElement
     public int getId() {
         return id;
     }
@@ -19,6 +20,7 @@ public class Usuarios {
         this.id = id;
     }
 
+    @XmlElement
     public String getNombre() {
         return nombre;
     }
@@ -27,6 +29,7 @@ public class Usuarios {
         this.nombre = nombre;
     }
 
+    @XmlElement
     public int getEdad() {
         return edad;
     }
@@ -34,4 +37,5 @@ public class Usuarios {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
 }

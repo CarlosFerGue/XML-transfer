@@ -1,8 +1,14 @@
+package ConexionBaseDatos;
+
+import Model.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnector {
     public void connectAndRetrieveData() throws ClassNotFoundException, SQLException {
@@ -11,6 +17,8 @@ public class DatabaseConnector {
         String password = "";
 
         Class.forName("com.mysql.cj.jdbc.Driver");
+
+        List<User> userList = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement();
