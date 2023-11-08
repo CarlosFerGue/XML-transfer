@@ -1,15 +1,20 @@
 package model;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public interface ITablas {
-    String traducir();
+    String traducir() throws SQLException;
 
-    void insertar(NodeList lista);
+    void insertar(NodeList lista) throws SQLException;
 
     //Default se aplica igual a todas las clases que la implementen,
     //en lugar de que se creen funciones vacias como las de
@@ -38,11 +43,22 @@ public interface ITablas {
         }
     }
 
-    default NodeList xmlToSQL(String xml_importar, String tabla, String item) {
+    default NodeList xmlToSQL(String xml_importar, String tabla, String item) throws ParserConfigurationException {
         NodeList listaDatos = null;
 
+        //Pasar el arcihvo a XML
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newDefaultInstance();
+        DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
 
+        //Indicamos que archivo vamos a procesar
+        System.out.println("Leyendo el archivo 'Archivos/" + tabla + "Importar.xml'");
+        Document documento = dbBuilder.parse("Archivos/" + tabla "Importar.xml");
+        documento.getDocumentElement().normalize();
+
+        //Obtenemos la lista de nodos "dato"
+        listaDatos = documento.getElementsByTagName(item);
+
+        //Devolvemos la lista
+        return listaDatos;
     }
-
-
 }
