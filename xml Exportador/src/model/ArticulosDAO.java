@@ -3,8 +3,10 @@ package model;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -17,7 +19,7 @@ public class ArticulosDAO implements ITablas{
     }
 
 
-    public void ejecutar(String accion_controller) throws SQLException, ParserConfigurationException {
+    public void ejecutar(String accion_controller) throws SQLException, ParserConfigurationException, IOException, SAXException {
         motorcito.conectar();
         switch (accion_controller){
             case "MOSTRAR":

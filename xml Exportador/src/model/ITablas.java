@@ -2,6 +2,7 @@ package model;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,7 +28,7 @@ public interface ITablas {
     default void exportar(String xml_exportar, String tabla) {
         try {
             //Creamos un archivo donde guardar el xml
-            File archivo = new File("Archivos/" + tabla + "Exportados.xml");
+            File archivo = new File("C://Users//charl//OneDrive//Escritorio//XML//XML-transfer//" + tabla + "Exportados.xml");
 
             //Creamos un FileWriter para escribir en ese archivo
             FileWriter escritor = new FileWriter(archivo);
@@ -43,7 +44,7 @@ public interface ITablas {
         }
     }
 
-    default NodeList xmlToSQL(String xml_importar, String tabla, String item) throws ParserConfigurationException {
+    default NodeList xmlToSQL(String xml_importar, String tabla, String item) throws ParserConfigurationException, IOException, SAXException {
         NodeList listaDatos = null;
 
         //Pasar el arcihvo a XML
@@ -52,7 +53,7 @@ public interface ITablas {
 
         //Indicamos que archivo vamos a procesar
         System.out.println("Leyendo el archivo 'Archivos/" + tabla + "Importar.xml'");
-        Document documento = dbBuilder.parse("Archivos/" + tabla "Importar.xml");
+        Document documento = dbBuilder.parse("Archivos/" + tabla + "Importar.xml");
         documento.getDocumentElement().normalize();
 
         //Obtenemos la lista de nodos "dato"
